@@ -1,0 +1,36 @@
+<div>
+	<button type="button" class="btn btn-primary pull-right"
+		ng-click="back()">
+		<span class="glyphicon glyphicon-arrow-left"></span> Voltar
+	</button>
+	<div ng-show="dataMessages != null && dataMessages != 'undefined'">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Url</th>
+					<th>Metodo</th>
+					<th>Response</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="dataMessages.length!=0" ng-repeat="message in dataMessages">
+					<td>{{ message.json.url }}</td>
+					<td>{{ message.json.method }}</td>
+					<td>
+						<button class="btn btn-warning btn-xs" ng-click="exibe(message)">
+							<span class="glyphicon glyphicon-zoom-in"></span> Response
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td ng-show="dataMessages.length==0">
+						Nenhum registro a exibir                
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="dataMessages == null || dataMessages =='undefined'">
+		Nenhum registro a exibir
+	</div>
+</div>

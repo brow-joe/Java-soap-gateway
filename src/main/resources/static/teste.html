@@ -1,0 +1,71 @@
+<div>
+	<button type="button" class="btn btn-primary pull-right"
+		ng-click="back()">
+		<span class="glyphicon glyphicon-arrow-left"></span> Voltar
+	</button><br><br>
+
+	<div class="row">
+	
+	<div ng-show="model.deal != null && model.deal != 'undefined' && model.deal.entryPoints != null && model.deal.entryPoints != 'undefined'" class="panel-group" id="accordionfirst">
+            <div class="panel panel-default">
+                <a class="panel-primary" data-toggle="collapse" data-parent="#accordionOne" href="!#/#collapseOne">
+	                <div class="panel-heading">
+	                    <h4 class="panel-title">EndPoints</h4>
+	                </div>
+                </a>                            
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+						<div class="panel-group" ng-show="model.deal.entryPoints.length!=0" ng-repeat="entry in model.deal.entryPoints" id="accordion">
+							<div class="panel panel-primary">
+								 <a class="panel-info" data-toggle="collapse" data-parent="#accordion{{$index}}" href="!#/#collapse{{$index}}">
+									<div class="panel-heading">{{ entry.method }}</div>
+								</a>
+								<div id="collapse{{$index}}" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div>
+											<form class="form-inline">
+								  				<div class="radio">
+													<label><input type="radio" name="optradio" checked="true" value=true ng-model="entry.synchronous" ng-value="true">Sincrono</label>
+												</div>
+												<div class="radio">
+													<label><input type="radio" name="optradio" value=false ng-model="entry.synchronous">Assincrono</label>
+												</div>
+											</form>
+											<button type="button" class="btn btn-primary" style="width: 160px;" ng-click="execute(entry)">
+												<span class="glyphicon glyphicon glyphicon-search"></span> Executar
+											</button>
+										</div><br>
+										<div class="panel panel-success">
+											<div class="panel-heading">Request</div>
+											<div class="panel-body">
+												<div class="input-group form-control" ng-repeat="parameter in entry.parametersArrayJson">
+													<span class="input-group-addon">{{parameter.id}}</span>
+  													<input type="text" class="form-control" ng-model="parameter.value" aria-describedby="basic-addon3">
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-warning">
+											<div class="panel-heading">Response</div>
+											<div class="panel-body"><textarea rows=10 class="form-control" disabled>{{ entry.response }}</textarea></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-show="model.deal.entryPoints.length==0">
+							Nenhum registro a exibir 
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="model.deal == null || model.deal =='undefined' || model.deal.entryPoints == null || model.deal.entryPoints =='undefined'">
+			<div class="row-fluid">
+    			<div class="span12 text-center">
+    				Nenhum registro a exibir
+    			</div>
+
+			</div>
+		</div>
+	</div>
+</div>

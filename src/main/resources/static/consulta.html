@@ -1,0 +1,46 @@
+<div>
+	<div ng-show="wsdlList != null && wsdlList != 'undefined'">
+		<button type="button" class="btn btn-primary pull-right" ng-click="register()">
+			<span class="glyphicon glyphicon glyphicon-plus"></span> Novo registro
+		</button>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>WSDL</th>
+					<th>Testar</th>
+					<th>Editar</th>
+					<th>Deletar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-show="wsdlList.length!=0" ng-repeat="wsdl in wsdlList">
+					<td>{{ wsdl.url }}</td>
+					<td>
+						<button class="btn btn-primary btn-xs" ng-click="test(wsdl, 'consult')">
+							<span class="glyphicon glyphicon-cloud-upload"></span> Testar
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-warning btn-xs" ng-click="edit(wsdl)">
+							<span class="glyphicon glyphicon-pencil"></span> Editar
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-danger btn-xs" ng-click="remove(wsdl)">
+							<span class="glyphicon glyphicon-trash"></span> Deletar
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td ng-show="wsdlList.length==0">
+						Nenhum registro a exibir                
+					</td>
+				</tr>
+		      
+			</tbody>
+		</table>
+	</div>
+	<div ng-show="wsdlList == null || wsdlList =='undefined'">
+		Nenhum registro a exibir
+	</div>
+</div>

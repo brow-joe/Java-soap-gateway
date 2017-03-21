@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	    <title>Soap gateway</title>
+		
+		<link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css">
+	</head>
+	
+	<body ng-app="home_app">
+		<div ng-controller="HomeController">
+			<div class="container">
+	  			<div class="page-header">
+	    			<h1>Soap gateway</h1>      
+	  			</div>   
+			</div>
+		    
+		    <div class="well">
+		    	<button type="button" class="btn btn-primary pull-left" ng-click="toMessages()">
+					<span class="badge">{{messages.length}}</span> Mensagens
+				</button>
+		    	<modal visible="showModal"></modal>
+		  		<div ng-view></div>
+	    	</div>
+    	</div>
+	</body>
+
+	<script type="text/javascript" rel="javascript" src="javascripts/external/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/external/bootstrap.min.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/external/angular.min.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/external/angular-route.js"></script>
+	
+	<script type="text/javascript" rel="javascript" src="javascripts/app/home-app.js"></script>
+	
+	<script type="text/javascript" rel="javascript" src="javascripts/app/controller/consultaController.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/service/consultaService.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/factory/consultaFactory.js"></script>
+	
+	<script type="text/javascript" rel="javascript" src="javascripts/app/controller/cadastroController.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/service/cadastroService.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/factory/cadastroFactory.js"></script>
+	
+	<script type="text/javascript" rel="javascript" src="javascripts/app/controller/testeController.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/service/testeService.js"></script>
+	<script type="text/javascript" rel="javascript" src="javascripts/app/factory/testeFactory.js"></script>
+	
+	<script type="text/javascript" rel="javascript" src="javascripts/app/controller/mensagemController.js"></script>
+</html>

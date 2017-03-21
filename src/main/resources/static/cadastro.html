@@ -1,0 +1,23 @@
+<div><br>
+	<div>
+		<button type="button" class="btn btn-primary pull-right"
+			ng-click="back()">
+			<span class="glyphicon glyphicon-arrow-left"></span> Voltar
+		</button>
+		<br>
+		<form name="form_data" novalidate>
+			<div class="form-group">
+				<label for="url">URL</label>
+				<input type="url" class="form-control" id="url" name="url_data" aria-describedby="descriptor" placeholder="Digite a url" ng-model="model.url" required>
+				<span ng-show="form_data.url_data.$touched && form_data.url_data.$invalid" ng-style="{color:'red'}">Este campo e requerido<br></span>
+				<small id="descriptor" class="form-text text-muted">Digite a url do xml (http://... ?wsdl)</small>
+			</div>
+			<button type="submit" ng-disabled="form_data.url_data.$invalid" class="btn btn-primary" ng-click="save()">
+				<span class="glyphicon glyphicon-floppy-open"></span> Salvar
+			</button>
+			<button type="submit" ng-disabled="form_data.url_data.$invalid" class="btn btn-primary" ng-click="toTest(model)">
+				<span class="glyphicon glyphicon-cloud-upload"></span> Testar
+			</button>
+		</form>
+	</div>
+</div>
