@@ -11,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import br.com.jonathan.adapter.IAdapter;
 import br.com.jonathan.domain.EntryMessegeRequestDomain;
 import br.com.jonathan.dto.EntryPointDTO;
 import br.com.jonathan.repository.EntryMessegeRepository;
+import br.com.jonathan.soap.ConnectionAvailableException;
 import br.com.jonathan.soap.executer.ISoapExecuter;
 import br.com.jonathan.soap.executer.SoapExecuterException;
 import br.com.jonathan.util.JSONUtil;
@@ -33,21 +36,26 @@ public class EntryPointService {
 	private IAdapter adapter;
 
 	@Async
-	public EntryPointDTO executeSync(EntryPointDTO entry) throws ServiceException {
+	public EntryPointDTO executeSync(EntryPointDTO entry) throws ServiceException, ConnectionAvailableException {
 		return execute(entry);
 	}
 
 	@Async
 	public EntryPointDTO executeAsync(EntryPointDTO entry) throws ServiceException {
-		Observable.from(Arrays.asList(entry))
-			.subscribeOn(Schedulers.io())
-			.subscribe(this::executeEntryToMessage);
+		Observable.from(Arrays.asList(entry)).subscribeOn(Schedulers.io()).subscribe(e -> {
+			try {
+				executeEntryToMessage(e);
+			} catch (ConnectionAvailableException ex) {
+				logger.error(ex);
+				saveErroConnectionMessage(entry, ex);
+			}
+		});
 
 		return entry;
 	}
 
 	@Async
-	public EntryPointDTO execute(EntryPointDTO entry) throws ServiceException {
+	public EntryPointDTO execute(EntryPointDTO entry) throws ServiceException, ConnectionAvailableException {
 		try {
 			String request = updateRequest(entry);
 			entry.setRequest(request);
@@ -58,6 +66,9 @@ public class EntryPointService {
 		} catch (SoapExecuterException e) {
 			logger.error(e);
 			throw new ServiceException(e);
+		} catch (ConnectionAvailableException e) {
+			logger.error(e);
+			throw new ConnectionAvailableException(e);
 		}
 	}
 
@@ -81,6 +92,14 @@ public class EntryPointService {
 	}
 
 	@Async
+	private void saveErroConnectionMessage(EntryPointDTO dto, ConnectionAvailableException e) {
+		String json = new Gson().toJson("Connection: " + e.getMessage());
+		dto.setResult(json);
+		EntryMessegeRequestDomain message = dto.getCoveredEntry();
+		repository.save(message);
+	}
+
+	@Async
 	public Long deleteMessage(EntryMessegeRequestDomain message) throws ServiceException {
 		try {
 			Long id = message.getId();
@@ -93,13 +112,16 @@ public class EntryPointService {
 	}
 
 	@Async
-	private void executeEntryToMessage(EntryPointDTO entryPoint) {
+	private void executeEntryToMessage(EntryPointDTO entryPoint) throws ConnectionAvailableException {
 		try {
 			EntryMessegeRequestDomain message = execute(entryPoint).getCoveredEntry();
 			repository.save(message);
 			logger.info("message post " + message.getId());
 		} catch (ServiceException e) {
 			logger.error(e);
+		} catch (ConnectionAvailableException e) {
+			logger.error(e);
+			throw new ConnectionAvailableException(e);
 		}
 	}
 

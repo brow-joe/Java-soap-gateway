@@ -16,6 +16,7 @@ import br.com.jonathan.components.ComponentException;
 import br.com.jonathan.components.WsdlDealComponent;
 import br.com.jonathan.domain.DealDomain;
 import br.com.jonathan.domain.WSDLDomain;
+import br.com.jonathan.soap.ConnectionAvailableException;
 
 @RestController
 @RequestMapping("/api/deal")
@@ -37,6 +38,8 @@ public class DealRest {
 		} catch (ComponentException e) {
 			logger.error(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		} catch (ConnectionAvailableException e) {
+			return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
 		}
 	}
 

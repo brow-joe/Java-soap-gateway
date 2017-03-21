@@ -17,12 +17,15 @@ import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 
 import br.com.jonathan.dto.EntryPointDTO;
+import br.com.jonathan.soap.ConnectionAvailable;
+import br.com.jonathan.soap.ConnectionAvailableException;
 
 public class SoapExecuter implements ISoapExecuter {
 	private final Logger logger = LogManager.getLogger(SoapExecuter.class);
 
 	@Override
-	public String execute(EntryPointDTO request) throws SoapExecuterException {
+	public String execute(EntryPointDTO request) throws SoapExecuterException, ConnectionAvailableException {
+		ConnectionAvailable.available(request.getUrl());
 		SOAPConnection connection = null;
 		try {
 			SOAPConnectionFactory factory = SOAPConnectionFactory.newInstance();

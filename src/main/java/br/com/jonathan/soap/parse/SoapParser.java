@@ -37,6 +37,8 @@ import com.predic8.wstool.creator.RequestTemplateCreator;
 import com.predic8.wstool.creator.SOARequestCreator;
 
 import br.com.jonathan.dto.SoapRequestDTO;
+import br.com.jonathan.soap.ConnectionAvailable;
+import br.com.jonathan.soap.ConnectionAvailableException;
 import groovy.xml.MarkupBuilder;
 
 public class SoapParser implements ISoapParser {
@@ -45,7 +47,8 @@ public class SoapParser implements ISoapParser {
 	private final List<String> SUPPORTS = Arrays.asList("SOAP11", "SOAP12");
 
 	@Override
-	public List<SoapRequestDTO> parse(String wsdl) throws ParserException {
+	public List<SoapRequestDTO> parse(String wsdl) throws ParserException, ConnectionAvailableException {
+		ConnectionAvailable.available(wsdl);
 		try {
 			WSDLParser parser = new WSDLParser();
 			Definitions definitions = parser.parse(wsdl);

@@ -5,11 +5,12 @@ app.controller('MensagemController', function($scope, $window, TesteService) {
 
 	$scope.exibe = function(data) {
 		data.json = JSON.stringify(data.json);
+		var result = JSON.stringify(JSON.parse(data.json).result);
 		TesteService.removeMessage(data, $scope).then(
 				function(message) {
 					if (message != null && message != 'undefined') {
 						$scope.openModal('success', 'Resposta!', '', '', true,
-								true, data.json);
+								true, result);
 						TesteService.findAllMessages($scope).then(
 								function(list) {
 									$scope.messages = list;

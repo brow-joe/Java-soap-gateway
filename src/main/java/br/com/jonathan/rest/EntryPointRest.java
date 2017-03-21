@@ -19,6 +19,7 @@ import br.com.jonathan.domain.EntryMessegeRequestDomain;
 import br.com.jonathan.dto.EntryPointDTO;
 import br.com.jonathan.service.EntryPointService;
 import br.com.jonathan.service.ServiceException;
+import br.com.jonathan.soap.ConnectionAvailableException;
 
 @RestController
 @RequestMapping("/api/entry")
@@ -47,6 +48,8 @@ public class EntryPointRest {
 		} catch (ServiceException e) {
 			logger.error(e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		} catch (ConnectionAvailableException e) {
+			return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
 		}
 	}
 

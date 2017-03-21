@@ -15,6 +15,7 @@ import br.com.jonathan.domain.DealDomain;
 import br.com.jonathan.domain.WSDLDomain;
 import br.com.jonathan.service.ServiceException;
 import br.com.jonathan.service.WSDLService;
+import br.com.jonathan.soap.ConnectionAvailableException;
 import br.com.jonathan.soap.parse.ISoapParser;
 import br.com.jonathan.soap.parse.ParserException;
 
@@ -30,7 +31,7 @@ public class WsdlDealComponent {
 	private IAdapter adapter;
 
 	@Async
-	public DealDomain findDealByWsdl(WSDLDomain wsdl) throws ComponentException {
+	public DealDomain findDealByWsdl(WSDLDomain wsdl) throws ComponentException, ConnectionAvailableException {
 		try {
 			if (wsdl.notExistsDealEntry() || Objects.isNull(wsdl.getId())) {
 				return searchDealByWsdl(wsdl);
@@ -41,14 +42,14 @@ public class WsdlDealComponent {
 		} catch (ServiceException e) {
 			logger.error(e);
 			throw new ComponentException(e);
-		} catch (Exception e) {
+		} catch (ConnectionAvailableException e) {
 			logger.error(e);
-			throw new ComponentException(e);
+			throw new ConnectionAvailableException(e);
 		}
 	}
 
 	@Async
-	public WSDLDomain saveWsdl(WSDLDomain wsdl) throws ComponentException {
+	public WSDLDomain saveWsdl(WSDLDomain wsdl) throws ComponentException, ConnectionAvailableException {
 		try {
 			if (wsdl.notExistsDealEntry()) {
 				DealDomain deal = searchDealByWsdl(wsdl);
@@ -58,14 +59,14 @@ public class WsdlDealComponent {
 		} catch (ServiceException e) {
 			logger.error(e);
 			throw new ComponentException(e);
-		} catch (Exception e) {
+		} catch (ConnectionAvailableException e) {
 			logger.error(e);
-			throw new ComponentException(e);
+			throw new ConnectionAvailableException(e);
 		}
 	}
 
 	@Async
-	public DealDomain searchDealByWsdl(WSDLDomain wsdl) throws ComponentException {
+	public DealDomain searchDealByWsdl(WSDLDomain wsdl) throws ComponentException, ConnectionAvailableException {
 		DealDomain deal = null;
 		try {
 			if (!StringUtils.endsWithIgnoreCase(wsdl.getUrl(), "?wsdl")) {
@@ -74,6 +75,7 @@ public class WsdlDealComponent {
 			deal = adapter.dealAdapter(parser.parse(wsdl.getUrl()));
 		} catch (ParserException e) {
 			logger.error(e);
+			throw new ComponentException(e);
 		}
 		return deal;
 	}
