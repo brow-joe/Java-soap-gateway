@@ -19,7 +19,7 @@ import br.com.jonathan.domain.EntryMessegeRequestDomain;
 import br.com.jonathan.dto.EntryPointDTO;
 import br.com.jonathan.service.EntryPointService;
 import br.com.jonathan.service.ServiceException;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 
 @RestController
 @RequestMapping("/api/entry")

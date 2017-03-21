@@ -15,7 +15,7 @@ import br.com.jonathan.domain.DealDomain;
 import br.com.jonathan.domain.WSDLDomain;
 import br.com.jonathan.service.ServiceException;
 import br.com.jonathan.service.WSDLService;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 import br.com.jonathan.soap.parse.ISoapParser;
 import br.com.jonathan.soap.parse.ParserException;
 

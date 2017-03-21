@@ -17,8 +17,8 @@ import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 
 import br.com.jonathan.dto.EntryPointDTO;
-import br.com.jonathan.soap.ConnectionAvailable;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailable;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 
 public class SoapExecuter implements ISoapExecuter {
 	private final Logger logger = LogManager.getLogger(SoapExecuter.class);

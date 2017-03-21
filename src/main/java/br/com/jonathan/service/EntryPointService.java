@@ -17,7 +17,7 @@ import br.com.jonathan.adapter.IAdapter;
 import br.com.jonathan.domain.EntryMessegeRequestDomain;
 import br.com.jonathan.dto.EntryPointDTO;
 import br.com.jonathan.repository.EntryMessegeRepository;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 import br.com.jonathan.soap.executer.ISoapExecuter;
 import br.com.jonathan.soap.executer.SoapExecuterException;
 import br.com.jonathan.util.JSONUtil;

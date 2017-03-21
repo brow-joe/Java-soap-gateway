@@ -16,7 +16,7 @@ import br.com.jonathan.components.ComponentException;
 import br.com.jonathan.components.WsdlDealComponent;
 import br.com.jonathan.domain.DealDomain;
 import br.com.jonathan.domain.WSDLDomain;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 
 @RestController
 @RequestMapping("/api/deal")

@@ -37,8 +37,8 @@ import com.predic8.wstool.creator.RequestTemplateCreator;
 import com.predic8.wstool.creator.SOARequestCreator;
 
 import br.com.jonathan.dto.SoapRequestDTO;
-import br.com.jonathan.soap.ConnectionAvailable;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailable;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 import groovy.xml.MarkupBuilder;
 
 public class SoapParser implements ISoapParser {

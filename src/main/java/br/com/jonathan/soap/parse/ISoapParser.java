@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.scheduling.annotation.Async;
 
 import br.com.jonathan.dto.SoapRequestDTO;
-import br.com.jonathan.soap.ConnectionAvailableException;
+import br.com.jonathan.soap.connection.ConnectionAvailableException;
 
 @FunctionalInterface
 public interface ISoapParser {

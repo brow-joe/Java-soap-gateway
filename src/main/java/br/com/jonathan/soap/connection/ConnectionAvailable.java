@@ -1,4 +1,4 @@
-package br.com.jonathan.soap;
+package br.com.jonathan.soap.connection;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

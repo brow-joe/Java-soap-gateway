@@ -1,4 +1,4 @@
-package br.com.jonathan.soap;
+package br.com.jonathan.soap.connection;
 
 public class ConnectionAvailableException extends Exception {
 	private static final long serialVersionUID = 1L;
